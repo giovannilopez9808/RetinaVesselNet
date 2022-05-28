@@ -1,0 +1,1 @@
+# Reconocimiento_de_patrones_proyecto_02
