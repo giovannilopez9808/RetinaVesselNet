@@ -5,21 +5,20 @@ from keras.applications import mobilenet_v2
 from numpy import expand_dims, array, uint8
 from argparse import Namespace
 from pandas import DataFrame
-from .params import mkdir
+from params import mkdir
 from os.path import join
 import tensorflow as tf
 
 
 class unet_model:
+
     def __init__(self, unfreeze: str) -> None:
         output_classes = 1
         self._create_mobilenet(unfreeze)
         self.model = self._basic_unet_model(output_classes)
 
     def _create_mobilenet(self, unfreeze: str) -> None:
-        base_model = mobilenet_v2.MobileNetV2(input_shape=[256,
-                                                           256,
-                                                           3],
+        base_model = mobilenet_v2.MobileNetV2(input_shape=[256, 256, 3],
                                               include_top=False)
         layer_names = [
             # 64x64
@@ -33,8 +32,9 @@ class unet_model:
             # 4x4
             'block_16_project',
         ]
-        base_model_outputs = [base_model.get_layer(name).output
-                              for name in layer_names]
+        base_model_outputs = [
+            base_model.get_layer(name).output for name in layer_names
+        ]
         # Create the feature extraction model
         self.down_stack = tf.keras.Model(inputs=base_model.input,
                                          outputs=base_model_outputs)
@@ -97,8 +97,7 @@ class unet_model:
         """
         Ejecuccion del modelo realizando el guardado del historial y los pesos del modelo
         """
-        filename = join(params["path results"],
-                        "checkpoint.pt")
+        filename = join(params["path results"], "checkpoint.pt")
         checkpoint = tf.keras.callbacks.ModelCheckpoint(filepath=filename,
                                                         save_weights_only=True,
                                                         monitor='val_accuracy',
@@ -121,16 +120,14 @@ class unet_model:
         history = DataFrame(self.history.history)
         history.index.name = "Epoch"
         mkdir(params["path results"])
-        filename = join(params["path results"],
-                        params["history name"])
+        filename = join(params["path results"], params["history name"])
         history.to_csv(filename)
 
     def save_model(self, params: dict) -> None:
         """
         Guardado del modelo
         """
-        filename = join(params["path results"],
-                        params["model name"])
+        filename = join(params["path results"], params["model name"])
         self.model.save(filename)
 
     def summary(self) -> None:
