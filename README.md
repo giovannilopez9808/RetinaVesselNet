@@ -64,3 +64,8 @@ Se utilizo un script para generar las imágenes guardadas en la carpeta `high_co
 ### Modelos preentrenados
 
 Los modelos se encuentran en la carpeta `results`
+
+
+### Requeriments
+
+El archivo requeriments fue obtenido a partir de los notebooks ejecutados en Google Colab
