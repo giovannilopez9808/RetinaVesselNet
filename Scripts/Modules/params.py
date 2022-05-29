@@ -8,7 +8,7 @@ def get_params(select_data: str) -> dict:
     parametros de los datos a tratar
     """
     params = {
-        "root": "/content/drive/MyDrive/Patrones",
+        "root": "../",
         # Direccion de los datos
         "path data": "Data",
         # Direccion de las graphicas
