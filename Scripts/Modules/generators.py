@@ -58,7 +58,7 @@ class generator_model:
                                                   rescale=1.0 / 255.0)
         self.train_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path train {self.params['folder image']} all"],
-            batch_size=self.args.batch_size,
+            batch_size=self.args.batch_size_train,
             target_size=(256, 256),
             class_mode=None,
             seed=54)
@@ -68,7 +68,7 @@ class generator_model:
             target_size=(256, 256),
             class_mode=None,
             seed=54,
-            batch_size=self.args.batch_size)
+            batch_size=self.args.batch_size_train)
         self.train = self.image_mask_generator(self.train_image_generator,
                                                self.train_mask_generator)
 
@@ -79,12 +79,12 @@ class generator_model:
         image_data_generator = ImageDataGenerator(rescale=1.0 / 255.0)
         self.validate_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path validate {self.params['folder image']} all"],
-            batch_size=40,
+            batch_size=self.args.batch_size_val,
             seed=54,
             class_mode=None)
         self.validate_masks_generator = image_data_generator.flow_from_directory(
             self.params[f"path validate {self.params['folder mask']} all"],
-            batch_size=40,
+            batch_size=self.args.batch_size_val,
             seed=54,
             class_mode=None)
         self.validation = self.image_mask_generator(
@@ -97,12 +97,12 @@ class generator_model:
         image_data_generator = ImageDataGenerator(rescale=1.0 / 255.0)
         self.test_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path test {self.params['folder image']} all"],
-            batch_size=20,
+            batch_size=self.args.batch_size_test,
             seed=54,
             class_mode=None)
         self.test_masks_generator = image_data_generator.flow_from_directory(
             self.params[f"path test {self.params['folder mask']} all"],
-            batch_size=20,
+            batch_size=self.args.batch_size_test,
             seed=54,
             class_mode=None)
         self.test = self.image_mask_generator(self.test_image_generator,

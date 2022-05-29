@@ -106,8 +106,8 @@ class unet_model:
         self.history = self.model.fit(
             data_generator.train,
             validation_data=data_generator.validation,
-            steps_per_epoch=args.steps_per_epoch,
-            validation_steps=args.steps_per_epoch,
+            steps_per_epoch=args.steps_per_epoch_train,
+            validation_steps=args.steps_per_epoch_val,
             epochs=args.epochs,
             callbacks=[checkpoint])
         self.save_history(params)
