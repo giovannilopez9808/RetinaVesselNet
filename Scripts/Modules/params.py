@@ -27,7 +27,8 @@ def get_params(select_data: str) -> dict:
         params["folder image"] = "high_contrast"
     if select_data == "normal":
         params["folder image"] = "normal"
-    params["path graphics"] = join(params["path graphics"],
+    params["path graphics"] = join(params["root"],
+                                   params["path graphics"],
                                    params["folder image"])
     params["path results"] = join(params["path results"],
                                   params["folder image"])
