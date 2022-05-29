@@ -3,6 +3,7 @@ from numpy import where, expand_dims
 
 
 class generator_model:
+
     def __init__(self, params, args):
         """
         Contiene los metodos para generar imagenes a partir de las encontradas en las rutas de entrenamiento y test
@@ -28,15 +29,16 @@ class generator_model:
         """
         Definicon de los generadores para los datos y las mascaras
         """
-        self.image_data_args = dict(rotation_range=90,
-                                    width_shift_range=0.3,
-                                    height_shift_range=0.3,
-                                    shear_range=0.5,
-                                    zoom_range=0.3,
-                                    horizontal_flip=True,
-                                    vertical_flip=True,
-                                    fill_mode='reflect',
-                                    )
+        self.image_data_args = dict(
+            rotation_range=90,
+            width_shift_range=0.3,
+            height_shift_range=0.3,
+            shear_range=0.5,
+            zoom_range=0.3,
+            horizontal_flip=True,
+            vertical_flip=True,
+            fill_mode='reflect',
+        )
         self.mask_data_args = dict(rotation_range=90,
                                    width_shift_range=0.3,
                                    height_shift_range=0.3,
@@ -45,14 +47,15 @@ class generator_model:
                                    horizontal_flip=True,
                                    vertical_flip=True,
                                    fill_mode='reflect',
-                                   preprocessing_function=lambda x: where(x > 0, 1, 0).astype(x.dtype))
+                                   preprocessing_function=lambda x: where(
+                                       x > 0, 1, 0).astype(x.dtype))
 
     def _get_data(self) -> None:
         """
         Creacion de los generadores de datos para los datos de entrenamiento y validacion
         """
         image_data_generator = ImageDataGenerator(**self.image_data_args,
-                                                  rescale=1.0/255.0)
+                                                  rescale=1.0 / 255.0)
         self.train_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path train {self.params['folder image']} all"],
             batch_size=self.args.batch_size,
@@ -73,7 +76,7 @@ class generator_model:
         """
         Creacion de los generadores de datos para los datos de test
         """
-        image_data_generator = ImageDataGenerator(rescale=1.0/255.0)
+        image_data_generator = ImageDataGenerator(rescale=1.0 / 255.0)
         self.validate_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path validate {self.params['folder image']} all"],
             batch_size=40,
@@ -84,22 +87,22 @@ class generator_model:
             batch_size=40,
             seed=54,
             class_mode=None)
-        self.validation = self.image_mask_generator(self.validate_image_generator,
-                                                    self.validate_masks_generator)
+        self.validation = self.image_mask_generator(
+            self.validate_image_generator, self.validate_masks_generator)
 
     def _get_test(self) -> None:
         """
         Creacion de los generadores de datos para los datos de test
         """
-        image_data_generator = ImageDataGenerator(rescale=1.0/255.0)
+        image_data_generator = ImageDataGenerator(rescale=1.0 / 255.0)
         self.test_image_generator = image_data_generator.flow_from_directory(
             self.params[f"path test {self.params['folder image']} all"],
-            batch_size=10,
+            batch_size=20,
             seed=54,
             class_mode=None)
         self.test_masks_generator = image_data_generator.flow_from_directory(
             self.params[f"path test {self.params['folder mask']} all"],
-            batch_size=10,
+            batch_size=20,
             seed=54,
             class_mode=None)
         self.test = self.image_mask_generator(self.test_image_generator,
@@ -109,7 +112,6 @@ class generator_model:
         train_generator = zip(image_generator, mask_generator)
         for (img, mask) in train_generator:
             mask = mask[:, :, :, 0]
-            mask = expand_dims(mask,
-                               axis=3)
+            mask = expand_dims(mask, axis=3)
             # append
             yield (img, mask)
