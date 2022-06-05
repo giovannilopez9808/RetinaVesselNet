@@ -27,6 +27,8 @@ def get_params(select_data: str) -> dict:
         params["folder image"] = "high_contrast"
     if select_data == "normal":
         params["folder image"] = "normal"
+    if select_data == "grayscale":
+        params["folder image"] = "grayscale"
     params["path graphics"] = join(params["root"],
                                    params["path graphics"],
                                    params["folder image"])
@@ -53,6 +55,30 @@ def get_args(params: dict) -> Namespace:
     args.steps_per_epoch_val = args.val_len // args.batch_size_val
     args.epochs = 15
     return args
+
+
+def get_graphics_params() -> dict:
+    params = {
+        "files": ["history_01.csv",
+                  "history_02.csv",
+                  "history_03.csv"],
+        "loss": {
+            "y lim": [0.15, 0.6],
+            "title": "train loss"
+        },
+        "accuracy": {
+            "y lim": [0.8, 0.92],
+            "title": "train accuracy"},
+        "val_loss": {
+            "y lim": [0.15, 0.5],
+            "title": "validation loss"
+        },
+        "val_accuracy": {
+            "y lim": [0.8, 0.94],
+            "title": "validation accuracy"
+        },
+    }
+    return params
 
 
 def ls(path: str) -> list:
