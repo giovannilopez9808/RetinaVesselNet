@@ -1,2 +1,7 @@
 \section{Conclusiones}
 
+Los resultados obtenidos por los modelos con los diferentes modos de entrenamiento realizan una buena tarea al segmentar los vasos capilares de imágenes de ojos humanos. La arquitectura propuesta es eficiente en espacio de memoria y tiempo de entrenamiento, esto debido a que con 15 epocas, el modelo tardaba entre 10 a 15 minutos de entrenamiento. Observando las figruas \ref{fig:normal_results}, \ref{fig:high_contrast_results} y \ref{fig:grayscale_results} se muestra que los métodos de fine tunning y conexión dircta obtienen buenos resultados en comparación el método de full tunning. Los mejores resultados se obtuvieron cuando la imágen de entrada fue prepocesada con un filtro de alto contraste. Las predicciones obtenidas por los modelos donde la entrada fue una imágen en escala de grises son semejantes a las obtenidas por las imágenes con alto contraste, sin embargo estas presentan discontinuidades no existentes. La ventaja que ofrecen estas predicciones es que el tiempo y memoria usada durante el entrenamiento fue menor, por lo que puede ser una alternativa cuando se tenga estos escenarios.
+
+\subsection{Código}
+
+El código de los modelos y predicciones, las bases de datos y este documento se encuentran en el siguiente repositorio \href{https://github.com/giovannilopez9808/reconocimiento_de_patrones_proyecto_02/}{GitHub}.
