@@ -2,7 +2,7 @@
 
 Las redes neuronales convolucionales tienen sus bases en el Neocognitron introducido por  Kunihiko Fukushima\cite{Fukushima_1980}. Este modelo fue mejorado por Yann LeCun\cite{Lecun_1998} al emplear un método de aprendizaje basado en la propagación hacia atrás para entrenar el sistema correctamente. En el año 2012, Dan Ciresan refino e implemento el modelo para unidades de procesamiento gráfico (GPU) consiguiendo mejores resultados\cite{Cirecsan_2011}.
 
-Las redes neuronales convolucionales consisten en múltiples capas de filtros convolucionales de una o más dimensiones. Por lo general, después del proceso de una capa de filtro se añade una función para realizar un mapeo causal no-lineal. En la figura \ref{fig:CNN} se muestra la arquitectura de una red convolucional.
+Las redes neuronales convolucionales consisten en múltiples capas de filtros convolucionales de una o más dimensiones. Por lo general, después del proceso de una capa de filtro se añade una capa que aplica una función que realizar un mapeo causal no-lineal. En la figura \ref{fig:CNN} se muestra la arquitectura de una red convolucional.
 
 \begin{figure}[H]
     \centering
@@ -13,7 +13,7 @@ Las redes neuronales convolucionales consisten en múltiples capas de filtros co
 
 \subsubsection{Capa Max pooling}
 
-La capa de Max pooling realiza una operacion que calcula el máximo valor de una submatriz. Este valor máximo es guardado en una matriz con menor dimensión que la original. En la figura \ref{fig:max_pooling} se muestra un ejemplo de como se reduce una matriz de dimensión $4x4$ a una de $2x2$.
+La capas que aplican la función de Max pooling realizan una operacion que calcula el valor máximo de una submatriz. Este valor máximo es guardado en una matriz con menor dimensión que la original. En la figura \ref{fig:max_pooling} se muestra un ejemplo de como se reduce una matriz de dimensión $4x4$ a una de $2x2$.
 
 \begin{figure}[H]
     \centering
